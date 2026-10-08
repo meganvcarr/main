@@ -1,0 +1,13 @@
+{
+  "name": "endoverdose-recreation",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "export": "node tools/export-svg.mjs"
+  },
+  "devDependencies": {
+    "dom-to-svg": "^0.12.2",
+    "esbuild": "^0.25.0",
+    "playwright-core": "^1.55.0"
+  }
+}
