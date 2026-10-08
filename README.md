@@ -7,9 +7,14 @@ It's built so the design can be dragged straight into Figma.
 
 **Option A: drag and drop (no plugin needed)**
 
-1. Download `figma/endoverdose-desktop.svg` (and `figma/endoverdose-mobile.svg` if you want the phone layout).
+1. Download a file from the `figma/` folder:
+   - `endoverdose-home-desktop.svg`: homepage (2000px wide, same size as the reference screenshots)
+   - `endoverdose-solution-desktop.svg`: About Us → Our Solution page
+   - `endoverdose-home-mobile.svg` / `endoverdose-solution-mobile.svg`: phone layouts (390px wide)
 2. Drag the file onto your Figma canvas.
-3. Every heading, paragraph and button label comes in as an **editable text layer** in Montserrat.
+3. Every heading, paragraph and button label comes in as an **editable text layer**, using the site's
+   fonts (all free in Figma): **Tiny5** (pixel headlines and numbers), **Roboto Condensed** (menu, labels,
+   buttons), **Roboto Mono** (body text), and **Lexend** (logo).
    Shapes, colors, rounded corners and icons come in as editable vectors.
 4. Optional cleanup: select the imported group, then use *Frame selection* (Ctrl/Cmd + Alt + G)
    and *Ungroup* to work with individual sections.
@@ -24,9 +29,9 @@ If you want Figma auto layout (frames that resize like the website does), instal
 
 ## Edit the design in code
 
-- `index.html` holds the page content, section by section.
+- `index.html` is the homepage and `solution.html` is the Our Solution page.
 - `styles.css` holds the styles. The colors and fonts at the top (`:root`) work like Figma styles.
-  Change `--red` and the whole page updates.
+  Change `--red` and the whole site updates.
 
 After editing, regenerate the Figma files:
 
@@ -40,5 +45,6 @@ The export uses Chromium through `playwright-core`. If it can't find a browser, 
 
 ## Notes
 
-- Text content comes from End Overdose's public pages (mission, stats, chapters, campaign, donation tiers).
-- Photos are placeholders labelled "Hero photo" and "Chapter photo". Drop real images into those frames in Figma.
+- Text, colors and fonts are matched to screenshots of the live site.
+- The pixel-art illustrations (naloxone box and cat) and the YouTube video are placeholders. Paste the real
+  images into those spots in Figma. Media logos are recreated as styled text.

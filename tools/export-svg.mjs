@@ -3,7 +3,7 @@
 // Usage: npm install && npm run export
 import { chromium } from "playwright-core";
 import { build } from "esbuild";
-import { writeFile } from "node:fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import path from "node:path";
 
@@ -24,13 +24,18 @@ const bundle = await build({
   write: false,
 });
 
+await mkdir(path.join(root, "figma"), { recursive: true });
 const browser = await chromium.launch({
   executablePath: process.env.CHROMIUM_PATH || undefined,
 });
 
-for (const [name, width] of [["desktop", 1440], ["mobile", 390]]) {
-  const page = await browser.newPage({ viewport: { width, height: 900 } });
-  await page.goto(pathToFileURL(path.join(root, "index.html")).href, { waitUntil: "networkidle" });
+const pages = [["home", "index.html"], ["solution", "solution.html"]];
+const sizes = [["desktop", 2000], ["mobile", 390]];
+
+for (const [pageName, file] of pages) for (const [size, width] of sizes) {
+  const name = `${pageName}-${size}`;
+  const page = await browser.newPage({ viewport: { width, height: 1000 } });
+  await page.goto(pathToFileURL(path.join(root, file)).href, { waitUntil: "networkidle" });
   await page.evaluate(() => document.fonts.ready);
   await page.addScriptTag({ content: bundle.outputFiles[0].text });
   const svg = await page.evaluate(() => window.__toSVG());
